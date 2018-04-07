@@ -145,34 +145,47 @@ class Show
 
   def initialize(name)
     @name = name
+    @scenes = []
+    @cues = []
   end
 
   def output
     [Version, %Q{show "#{name}" 0 0 0 0 0 0 0 0 0 0 "2.04"}]
   end
 
+  def load_csv(path)
+    CSV.open(path, skip_blanks: true) do |csv|
+      headers = csv.shift
+      @scenes << Scene.new(name, 'Channel Setup', headers[2..-1])
+      csv.each do |row|
+        @cues << Cue.new(*row)
+      end
+    end
+  end
+
+  def save
+    dir = name
+    FileUtils.mkdir_p(dir)
+    File.open(File.join(dir, name+'.shw'), 'w') do |show_h|
+      show_h.puts output
+      @scenes.each.with_index do |scene, i|
+        show_h.puts scene.show_line(i)
+        File.open(File.join(dir, name+('.%03d.scn' % i)), 'w') do |scene_h|
+          scene_h.puts scene.output
+        end
+      end
+      @cues.each.with_index do |cue, i|
+        show_h.puts cue.show_line(i)
+        show_h.puts cue.snippet.show_line(i)
+        File.open(File.join(dir, name+('.%03d.snp' % i)), 'w') do |snip_h|
+          snip_h.puts cue.snippet.output
+        end
+      end
+    end
+  end
+
 end
 
 show = Show.new('Sweeney Todd')
-FileUtils.mkdir_p(show.name)
-File.open(File.join(show.name, show.name+'.shw'), 'w') do |show_h|
-  show_h.puts show.output
-
-  counter = 0
-  CSV.foreach('testdata/ST/Sweeney Todd Mic Cues.csv', headers: true, skip_blanks: true) do |row|
-    if (counter == 0)
-      scene = Scene.new(show.name, 'Channel Setup', row.headers[2..-1])
-      show_h.puts scene.show_line(counter)
-      File.open(File.join(show.name, show.name+'.%03d.scn'%counter), 'w') do |scene_h|
-        scene_h.puts scene.output
-      end
-    end
-    cue = Cue.new(*row.fields)
-    show_h.puts cue.show_line(counter)
-    show_h.puts cue.snippet.show_line(counter)
-    File.open(File.join(show.name, show.name+'.%03d.snp'%counter), 'w') do |snip_h|
-      snip_h.puts cue.snippet.output
-    end
-    counter += 1
-  end
-end
+show.load_csv('testdata/ST/Sweeney Todd Mic Cues.csv')
+show.save
