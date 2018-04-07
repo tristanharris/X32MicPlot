@@ -38,6 +38,10 @@ class Colour
     List.values.sample
   end
 
+  def self.default
+    List[:blue]
+  end
+
 end
 
 class Icon
@@ -52,8 +56,12 @@ class Icon
     new('image', (1..74).to_a.sample)
   end
 
-  def none
+  def self.none
     new('', 1)
+  end
+
+  def self.default
+    new('Man', 41)
   end
 
 end
@@ -100,7 +108,7 @@ class Channel
 
   attr_reader :num, :name, :icon, :colour
 
-  def initialize(num, name, icon=Icon.random, colour=Colour.random)
+  def initialize(num, name, icon=Icon.default, colour=Colour.default)
     @num, @name, @icon, @colour = num, name, icon, colour
   end
 
