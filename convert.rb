@@ -85,7 +85,7 @@ class Snippet
   end
 
   def output
-    [header] + @mutes.map.with_index do |mute, i|
+    [header.ljust(127)] + @mutes.map.with_index do |mute, i|
       %q{/ch/%02d/mix/on %s} % [i+1, mute ? 'ON' : 'OFF']
     end
   end
@@ -124,8 +124,8 @@ class Scene
   end
 
   def output
-    [header] + @channels.map.with_index do |name, i|
-      Channel.new(i, name).output
+    [header.ljust(127)] + @channels.map.with_index do |name, i|
+      Channel.new(i+1, name).output
     end
   end
 
