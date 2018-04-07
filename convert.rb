@@ -62,7 +62,7 @@ class Cue
 
   attr_reader :snippet
 
-  def initialize(num, comment, *mutes)
+  def initialize(num, comment, mutes)
     @num, @comment, @snippet = num.to_i, comment, Snippet.new(comment, mutes)
   end
 
@@ -165,7 +165,7 @@ class Show
         @channels << Channel.new(i+1, ch_name)
       end
       csv.each do |row|
-        @cues << Cue.new(*row)
+        @cues << Cue.new(row[0], row[1], row[2..-1])
       end
     end
     create_channel_setup_scene
