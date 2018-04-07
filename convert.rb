@@ -165,7 +165,7 @@ class Show
         @channels << Channel.new(i+1, ch_name)
       end
       csv.each do |row|
-        @cues << Cue.new(row[0], row[1], row[2..-1])
+        @cues << Cue.new(row[1], row[0], row[2..-1])
       end
     end
     create_channel_setup_scene
