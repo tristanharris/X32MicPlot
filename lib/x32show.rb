@@ -10,4 +10,29 @@ module X32Show
   load File.dirname(__FILE__) + '/x32show/scene.rb'
   load File.dirname(__FILE__) + '/x32show/snippet.rb'
 
+  class IndexedStore
+
+    def initialize(klass, offset = 0)
+      @data = []
+      @klass = klass
+      @offset = offset
+    end
+
+    def add(*args)
+      obj = @klass.new(@data.size + @offset, *args)
+      found = @data.find {|a| a === obj}
+      if found
+        found
+      else
+        @data << obj
+        obj
+      end
+    end
+
+    def [](id)
+      @data[id + @offset]
+    end
+
+  end
+
 end

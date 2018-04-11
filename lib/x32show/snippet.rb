@@ -2,10 +2,10 @@ module X32Show
 
   class Snippet
 
-    attr_reader :name
+    attr_reader :name, :id
 
-    def initialize(name, mutes)
-      @name, @mutes = name, mutes
+    def initialize(id, name, mutes)
+      @id, @name, @mutes = id, name, mutes
     end
 
     def header
@@ -18,8 +18,12 @@ module X32Show
       end
     end
 
-    def show_line(counter)
-      %q{snippet/%03d "%s" 128 -1 0 0 1} % [counter, name]
+    def show_line
+      %q{snippet/%03d "%s" 128 -1 0 0 1} % [id, name]
+    end
+
+    def ===(other)
+      @mutes === other.instance_variable_get(:@mutes)
     end
 
   end

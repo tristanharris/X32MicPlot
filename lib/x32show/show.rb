@@ -12,6 +12,7 @@ module X32Show
       @scenes = []
       @cues = []
       @channels = []
+      @snippets = IndexedStore.new(Snippet)
     end
 
     def output
@@ -29,7 +30,8 @@ module X32Show
           @channels << Channel.new(i+1, ch_name)
         end
         csv.each do |row|
-          @cues << Cue.new(row[1], row[0], row[2..-1])
+          snippet = @snippets.add(row[0], row[2..-1])
+          @cues << Cue.new(row[1], row[0], snippet)
         end
       end
       create_channel_setup_scene
@@ -48,7 +50,7 @@ module X32Show
         end
         @cues.each.with_index do |cue, i|
           show_h.puts cue.show_line(i)
-          show_h.puts cue.snippet.show_line(i)
+          show_h.puts cue.snippet.show_line
           File.open(File.join(dir, name+('.%03d.snp' % i)), 'w') do |snip_h|
             snip_h.puts cue.snippet.output
           end

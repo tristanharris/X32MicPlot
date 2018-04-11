@@ -4,12 +4,12 @@ module X32Show
 
     attr_reader :snippet
 
-    def initialize(num, comment, mutes)
-      @num, @comment, @snippet = num.to_i, comment, Snippet.new(comment, mutes)
+    def initialize(num, comment, snippet)
+      @num, @comment, @snippet = num.to_i, comment, snippet
     end
 
     def show_line(counter)
-      %q{cue/%03d %d "%s" 0 -1 %d 0 1 0 0} % [counter, @num*100, @comment, counter]
+      %q{cue/%03d %d "%s" 0 -1 %d 0 1 0 0} % [counter, @num*100, @comment, snippet.id]
     end
 
   end
