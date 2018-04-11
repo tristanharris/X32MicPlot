@@ -12,6 +12,10 @@ module X32Show
 
   class IndexedStore
 
+    extend Forwardable
+
+    def_delegators :@data, :each, :map
+
     def initialize(klass, offset = 0)
       @data = []
       @klass = klass

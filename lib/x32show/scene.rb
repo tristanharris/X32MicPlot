@@ -2,20 +2,20 @@ module X32Show
 
   class Scene
 
-    attr_reader :name, :note
+    attr_reader :id, :name, :note
 
-    def initialize(name, note, channels)
-      @name, @note, @channels = name, note, channels
+    def initialize(id, name, note, channels)
+      @id, @name, @note, @channels = id, name, note, channels
     end
 
     def output
-      [header.ljust(127)] + @channels.map.with_index do |channel, i|
+      [header.ljust(127)] + @channels.map do |channel|
         channel.output
       end
     end
 
-    def show_line(counter)
-      %q{scene/%03d "%s" "%s" %%000000000 1} % [counter, name, note]
+    def show_line
+      %q{scene/%03d "%s" "%s" %%000000000 1} % [id, name, note]
     end
 
     def header
