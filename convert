@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# vim: set syntax=ruby:
+
+require_relative 'lib/x32show'
+
+if ARGV.size != 2
+  puts "Syntax: #{$PROGRAM_NAME} <output dirname> <csv input>"
+  exit 1
+end
+
+show = X32Show::Show.new(ARGV[0])
+show.load_csv(ARGV[1])
+show.save
+
