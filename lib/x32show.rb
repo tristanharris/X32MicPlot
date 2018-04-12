@@ -14,7 +14,7 @@ module X32Show
 
     extend Forwardable
 
-    def_delegators :@data, :each, :map
+    def_delegators :@data, :each, :map, :zip
 
     def initialize(klass, offset = 0)
       @data = []

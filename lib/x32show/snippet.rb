@@ -2,10 +2,11 @@ module X32Show
 
   class Snippet
 
-    attr_reader :name, :id
+    attr_reader :id, :name
 
-    def initialize(id, name, mutes)
+    def initialize(id, mutes, channels, name=nil)
       @id, @name, @mutes = id, name, mutes
+      generate_name(channels) unless name
     end
 
     def header
@@ -24,6 +25,16 @@ module X32Show
 
     def ===(other)
       @mutes === other.instance_variable_get(:@mutes)
+    end
+
+    private
+    def generate_name(channels)
+      names = channels.zip(@mutes).map do |c, m|
+        c.name[0..1] if m
+      end.compact
+      names << 'All Off' if names.empty?
+      names[4] = '+'+(names.size - 4).to_s if names.size > 5
+      @name = names[0..4].join(' ')
     end
 
   end
