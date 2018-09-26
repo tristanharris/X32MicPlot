@@ -37,8 +37,8 @@ module X32Show
       create_channel_setup_scene
     end
 
-    def save
-      dir = name
+    def save(dir = '.')
+      dir = File.join(dir, name)
       FileUtils.mkdir_p(dir)
       File.open(File.join(dir, name+'.shw'), 'w') do |show_h|
         show_h.puts output
