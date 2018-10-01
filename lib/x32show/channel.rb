@@ -4,8 +4,9 @@ module X32Show
 
     attr_reader :num, :name, :icon, :colour
 
-    def initialize(num, name, icon=Icon.default, colour=Colour.default)
-      @num, @name, @icon, @colour = num, name, icon, colour
+    def initialize(num, name, icon=Icon.default, colour=nil)
+      colour = icon.default_colour unless colour
+      @num, @name, @icon, @colour = num, name, icon, Colour[colour]
     end
 
     def output

@@ -10,5 +10,5 @@ end
 
 show = X32Show::Show.new(ARGV[0])
 show.load_csv(ARGV[1])
-show.save
+show.save(ARGV[0])
 

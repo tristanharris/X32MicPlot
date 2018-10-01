@@ -36,7 +36,7 @@ module X32Show
     end
 
     def self.default
-      List[:blue]
+      List[:black]
     end
 
   end

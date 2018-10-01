@@ -25,9 +25,12 @@ module X32Show
 
     def load_csv(path)
       CSV.open(path, skip_blanks: true) do |csv|
-        headers = csv.shift
-        headers[2..-1].each do |ch_name|
-          @channels.add(ch_name)
+        icons = csv.shift
+        @name = icons[0] unless icons[0].empty?
+        names = csv.shift
+        headers = names.zip icons
+        headers[2..-1].each do |ch_name, icon|
+          @channels.add(ch_name, Icon[icon])
         end
         csv.each do |row|
           snippet = @snippets.add(row[2..-1], @channels)
