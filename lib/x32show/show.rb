@@ -33,6 +33,7 @@ module X32Show
           @channels.add(ch_name, Icon[icon])
         end
         csv.each do |row|
+          next if row.compact.empty?
           snippet = @snippets.add(row[2..-1], @channels)
           @cues.add(row[1], row[0], snippet)
         end
