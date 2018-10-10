@@ -9,6 +9,11 @@ if ARGV.size != 2
 end
 
 show = X32Show::Show.new(ARGV[0])
-show.load_csv(ARGV[1])
+begin
+  show.load_csv(ARGV[1])
+rescue CSV::MalformedCSVError => e
+  puts 'Bad CSV format: ' + e.message
+  exit 1
+end
 show.save(ARGV[0])
 

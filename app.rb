@@ -12,7 +12,11 @@ class App < Sinatra::Application
   post '/convert' do
     redirect to('/') unless params[:csv]
     show = X32Show::Show.new('show')
-    show.load_csv(params[:csv][:tempfile].path)
+    begin
+      show.load_csv(params[:csv][:tempfile].path)
+    rescue CSV::MalformedCSVError => e
+      return 'Bad CSV format: ' + e.message
+    end
     file = Tempfile.new('zip')
     Dir.mktmpdir do |dir|
       show.save(dir)
