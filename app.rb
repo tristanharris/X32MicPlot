@@ -4,6 +4,12 @@ require 'zip'
 
 class App < Sinatra::Application
 
+  helpers do
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
+  end
+
   get '/' do
     erb :convert
   end
@@ -26,6 +32,12 @@ class App < Sinatra::Application
       end
     end
     send_file file.path, type: :zip, disposition: :attachment, filename: show.name+'.zip'
+  end
+
+  get '/edit' do
+    show = X32Show::Show.new('show')
+    show.load_csv('public/example_cues.csv')
+    erb :edit, locals: {show: show}
   end
 
 end

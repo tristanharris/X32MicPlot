@@ -1,0 +1,85 @@
+[data-col=OFF] {
+  background: black;
+  color: white;
+}
+[data-col=RD] {
+  background: red;
+  color: white;
+}
+[data-col=GN] {
+  background: green;
+  color: white;
+}
+[data-col=YE] {
+  background: yellow;
+  color: black;
+}
+[data-col=BL] {
+  background: blue;
+  color: white;
+}
+[data-col=MG] {
+  background: magenta;
+  color: black;
+}
+[data-col=CY] {
+  background: cyan;
+  color: white;
+}
+[data-col=WH] {
+  background: white;
+  color: black;
+}
+[data-col=iOFF] {
+  color: black;
+  background: white;
+}
+[data-col=iRD] {
+  color: red;
+  background: white;
+}
+[data-col=iGN] {
+  color: green;
+  background: white;
+}
+[data-col=iYE] {
+  color: yellow;
+  background: black;
+}
+[data-col=iBL] {
+  color: blue;
+  background: white;
+}
+[data-col=iMG] {
+  color: magenta;
+  background: black;
+}
+[data-col=iCY] {
+  color: cyan;
+  background: white;
+}
+[data-col=iWH] {
+  color: white;
+  background: black;
+}
+
+#show {
+  border-collapse: collapse;
+}
+#show th, #show td {
+  border: 1px solid black;
+}
+#show tbody td {
+  text-align: center;
+}
+#show tbody td:not(:empty) {
+  background: green;
+}
+#show thead th {
+  vertical-align: top;
+  white-space: pre;
+  min-width: 70px;
+}
+#show thead img {
+  width: 70px;
+}

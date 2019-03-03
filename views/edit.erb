@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mic Plotter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.2/jsrender.min.js"></script>
+    <script src="/js/editor.js"></script>
+    <link rel='stylesheet' href="/css/editor.css">
+  </head>
+  <body>
+    <table id='show'>
+    </table>
+
+    <script id="show-template" type="text/x-jsrender">
+      <thead>
+        <tr id='mic-header'><th colspan=2>{{>name}}</th>
+          {{for channels tmpl='#mic-head-template'/}}
+        </tr>
+      </thead>
+      <tbody id='cues'>
+        {{for cues tmpl='#cue-template'/}}
+      </tbody>
+    </script>
+    <script id="mic-head-template" type="text/x-jsrender">
+      <th data-col='{{>colour}}'><img alt='{{attr:icon.name}}' title='{{attr:icon.name}}' src='{{url:icon.url}}'><br>{{>name}}</th>
+    </script>
+    <script id="entry-template" type="text/x-jsrender">
+      <td>{{>~state}}</td>
+    </script>
+    <script id="cue-template" type="text/x-jsrender">
+      <tr><th>{{>num}}</th><th>{{>comment}}</th>
+        {{for mutes itemVar="~state" tmpl='#entry-template'/}}
+      </tr>
+    </script>
+
+    <script>
+      var show = $.parseJSON('<%= show.to_json.gsub('\n', '\\\\\\n') %>');
+      populate(show);
+    </script>
+  </body>
+</html>
+
