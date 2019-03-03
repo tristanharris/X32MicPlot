@@ -3,10 +3,9 @@ require_relative 'lib/x32show'
 require 'zip'
 
 class App < Sinatra::Application
-  enable :inline_templates
 
   get '/' do
-    erb :index
+    erb :convert
   end
 
   post '/convert' do
@@ -30,25 +29,3 @@ class App < Sinatra::Application
   end
 
 end
-
-__END__
-
-@@ index
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>X32 Plot Converter</title>
-  </head>
-  <body>
-    <h1>X32 Plot Converter</h1>
-    <form method='post' action='convert' enctype='multipart/form-data'>
-      <input type='file' name='csv' accept='.csv'>
-      <input type='submit'>
-    </form>
-    <p>
-      <h3>Examples</h3>
-      <a href='/example_cues.ods'>OpenOffice spreadsheet</a>
-      <a href='/example_cues.csv'>CSV file</a>
-    </p>
-  </body>
-</html>
