@@ -39,6 +39,10 @@ module X32Show
       List[:black]
     end
 
+    def as_json
+      code
+    end
+
   end
 
 end

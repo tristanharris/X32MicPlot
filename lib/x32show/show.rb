@@ -62,6 +62,17 @@ module X32Show
       end
     end
 
+    def to_json
+      as_json.to_json
+    end
+
+    def as_json
+      json = {name: name}
+      json[:channels] = @channels.map(&:as_json)
+      json[:cues] = @cues.map(&:as_json)
+      json
+    end
+
   end
 
 end

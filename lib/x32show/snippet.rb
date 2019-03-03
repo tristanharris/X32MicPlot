@@ -27,6 +27,12 @@ module X32Show
       @mutes === other.instance_variable_get(:@mutes)
     end
 
+    def as_json
+      @mutes.map do |mute|
+        mute
+      end
+    end
+
     private
     def generate_name(channels)
       names = channels.zip(@mutes).map do |c, m|

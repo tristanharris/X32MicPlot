@@ -18,6 +18,10 @@ module X32Show
       true
     end
 
+    def as_json
+      {num: num, name: name, icon: icon.as_json, colour: colour.as_json}
+    end
+
   end
 
 end

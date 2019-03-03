@@ -41,6 +41,14 @@ module X32Show
       File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'public', 'icons', code.to_s+'.gif')
     end
 
+    def url
+      File.join('/', 'icons', code.to_s+'.gif')
+    end
+
+    def as_json
+      {name: name, url: url}
+    end
+
   end
 
 end

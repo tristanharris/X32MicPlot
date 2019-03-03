@@ -12,6 +12,10 @@ module X32Show
       %q{cue/%03d %d "%s" 0 -1 %d 0 1 0 0} % [id, @num*100, @comment, snippet.id]
     end
 
+    def as_json
+      {id: id, num: @num, comment: @comment, mutes: snippet.as_json}
+    end
+
   end
 
 end
