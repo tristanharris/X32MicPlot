@@ -3,7 +3,7 @@
   <head>
     <title>Mic Plotter</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.2/jsrender.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsviews/1.0.2/jsviews.min.js"></script>
     <script src="/js/editor.js"></script>
     <link rel='stylesheet' href="/css/editor.css">
   </head>
@@ -25,11 +25,11 @@
       <th data-col='{{>colour}}'><img alt='{{attr:icon.name}}' title='{{attr:icon.name}}' src='{{url:icon.url}}'><br>{{>name}}</th>
     </script>
     <script id="entry-template" type="text/x-jsrender">
-      <td>{{>~state}}</td>
+      <td data-link="data-inuse{:state?'true':'false'}">{^{>state}}</td>
     </script>
     <script id="cue-template" type="text/x-jsrender">
       <tr><th>{{>num}}</th><th>{{>comment}}</th>
-        {{for mutes itemVar="~state" tmpl='#entry-template'/}}
+        {{for mutes tmpl='#entry-template'/}}
       </tr>
     </script>
 

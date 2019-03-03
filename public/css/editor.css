@@ -72,7 +72,7 @@
 #show tbody td {
   text-align: center;
 }
-#show tbody td:not(:empty) {
+#show tbody td[data-inuse=true] {
   background: green;
 }
 #show thead th {

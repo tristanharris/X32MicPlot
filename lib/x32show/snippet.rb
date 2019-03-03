@@ -29,7 +29,7 @@ module X32Show
 
     def as_json
       @mutes.map do |mute|
-        mute
+        {state: mute}
       end
     end
 
