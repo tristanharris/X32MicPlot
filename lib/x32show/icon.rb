@@ -38,7 +38,7 @@ module X32Show
     end
 
     def path
-      File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'icons', code.to_s+'.gif')
+      File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'public', 'icons', code.to_s+'.gif')
     end
 
   end
