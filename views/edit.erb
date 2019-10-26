@@ -13,7 +13,7 @@
 
     <script id="show-template" type="text/x-jsrender">
       <thead>
-        <tr id='mic-header'><th colspan=2>{{>name}}</th>
+        <tr id='mic-header'><th colspan=2 contenteditable='true' data-link='name'></th>
           {{for channels tmpl='#mic-head-template'/}}
         </tr>
       </thead>
@@ -22,13 +22,13 @@
       </tbody>
     </script>
     <script id="mic-head-template" type="text/x-jsrender">
-      <th data-col='{{>colour}}'><img alt='{{attr:icon.name}}' title='{{attr:icon.name}}' src='{{url:icon.url}}'><br>{{>name}}</th>
+      <th data-col='{{>colour}}'><img alt='{{attr:icon.name}}' title='{{attr:icon.name}}' src='{{url:icon.url}}'><br><span contenteditable='true' data-link='name'></span></th>
     </script>
     <script id="entry-template" type="text/x-jsrender">
-      <td data-link="data-inuse{:state?'true':'false'}">{^{>state}}</td>
+      <td data-link="{:state:} data-inuse{:state?'true':'false'}" contenteditable='true'></td>
     </script>
     <script id="cue-template" type="text/x-jsrender">
-      <tr><th>{{>num}}</th><th>{{>comment}}</th>
+      <tr><th contenteditable='true' data-link='num'></th><th contenteditable='true' data-link='comment'></th>
         {{for mutes tmpl='#entry-template'/}}
       </tr>
     </script>
