@@ -5,7 +5,8 @@ module X32Show
     attr_reader :id, :snippet
 
     def initialize(id, num, comment, snippet)
-      @id, @num, @comment, @snippet = id, num.to_i, comment, snippet
+      @id, @num, @comment, @snippet = id, num.to_f, comment, snippet
+      raise "Too many decimal places in cue number #{num}" if @num*100 != (@num*100).to_i
     end
 
     def show_line
