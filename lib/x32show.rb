@@ -1,6 +1,6 @@
 module X32Show
 
-  Version = '#2.6#'
+  Version = '#2.7#'
 
   load File.dirname(__FILE__) + '/x32show/show.rb'
   load File.dirname(__FILE__) + '/x32show/channel.rb'
