@@ -26,6 +26,12 @@
 th {
   background: white;
 }
+tbody tr {
+  opacity: 0.7;
+}
+tbody tr:hover {
+  opacity: 1;
+}
 
 [data-col=OFF] {
   background: black;
