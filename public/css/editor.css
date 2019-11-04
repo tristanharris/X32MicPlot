@@ -1,3 +1,32 @@
+#show {
+  border-collapse: collapse;
+  position: relative;
+}
+#show th, #show td {
+  border: 1px solid black;
+}
+#show tbody td {
+  text-align: center;
+}
+#show tbody td[data-inuse=true] {
+  background: green;
+}
+#show thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  vertical-align: top;
+  white-space: pre;
+  min-width: 70px;
+}
+#show thead img {
+  width: 70px;
+}
+th {
+  background: white;
+}
+
 [data-col=OFF] {
   background: black;
   color: white;
@@ -61,25 +90,4 @@
 [data-col=iWH] {
   color: white;
   background: black;
-}
-
-#show {
-  border-collapse: collapse;
-}
-#show th, #show td {
-  border: 1px solid black;
-}
-#show tbody td {
-  text-align: center;
-}
-#show tbody td[data-inuse=true] {
-  background: green;
-}
-#show thead th {
-  vertical-align: top;
-  white-space: pre;
-  min-width: 70px;
-}
-#show thead img {
-  width: 70px;
 }
