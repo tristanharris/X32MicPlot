@@ -24,7 +24,7 @@ class App < Sinatra::Application
     end
     file = Tempfile.new('zip')
     Dir.mktmpdir do |dir|
-      show.save(dir)
+      show.save(dir, params.key?('include_scenes'))
       Zip::File.open(file.path, Zip::File::CREATE) do |zipfile|
         Dir[dir+'/*/*'].each do |filename|
           zipfile.add(File.join(show.name, File.basename(filename)), filename)

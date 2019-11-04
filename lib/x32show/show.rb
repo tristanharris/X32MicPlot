@@ -41,7 +41,7 @@ module X32Show
       create_channel_setup_scene
     end
 
-    def save(dir = '.')
+    def save(dir = '.', include_scenes = true)
       dir = File.join(dir, name)
       FileUtils.mkdir_p(dir)
       File.open(File.join(dir, name+'.shw'), 'w') do |show_h|
@@ -50,7 +50,7 @@ module X32Show
           show_h.puts scene.show_line
           File.open(File.join(dir, name+('.%03d.scn' % scene.id)), 'w') do |scene_h|
             scene_h.puts scene.output
-          end
+          end if include_scenes
         end
         @cues.each do |cue|
           show_h.puts cue.show_line

@@ -2,9 +2,24 @@
 # vim: set syntax=ruby:
 
 require_relative 'lib/x32show'
+require 'optparse'
+
+options = {scenes: true}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: #{opts.program_name} [options] <output dirname> <csv input>"
+
+  opts.on("--[no-]scenes", "Generate scene files (default: #{options[:scenes] ? 'Yes' : 'No'})") do |v|
+    options[:scenes] = v
+  end
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+end
+opts.parse!
 
 if ARGV.size != 2
-  puts "Syntax: #{$PROGRAM_NAME} <output dirname> <csv input>"
+  puts opts
   exit 1
 end
 
