@@ -54,9 +54,11 @@ module X32Show
         end
         @cues.each do |cue|
           show_h.puts cue.show_line
-          show_h.puts cue.snippet.show_line
-          File.open(File.join(dir, name+('.%03d.snp' % cue.snippet.id)), 'w') do |snip_h|
-            snip_h.puts cue.snippet.output
+        end
+        @snippets.each do |snippet|
+          show_h.puts snippet.show_line
+          File.open(File.join(dir, name+('.%03d.snp' % snippet.id)), 'w') do |snip_h|
+            snip_h.puts snippet.output
           end
         end
       end
